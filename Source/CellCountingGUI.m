@@ -49,16 +49,16 @@ settings.resultFileNameGrouped = strrep(settings.csvFile, '.csv', '_grouped.csv'
 settings.resultFileNameCounts = strrep(settings.csvFile, '.csv', '_counts.csv');
 cd(previousPath);
 
-%% TODO: replace with file open dialogs
+%% load the csv files
 if (~exist(settings.resultFileNameGrouped, 'file') || (exist(settings.resultFileNameGrouped, 'file') && strcmp('No', questdlg('Load previous group assignments?'))))
     settings.currentDetections = dlmread(settings.csvFile, ';', 1, 0);
     settings.currentDetections(:,end+1) = 0;
 else
     settings.currentDetections = dlmread(settings.resultFileNameGrouped, ';', 1, 0);
 end
-
 settings.groupIdIndex = size(settings.currentDetections, 2);
 
+%% load the raw image with the appropriate loader
 if (contains(settings.rawImageFile, '.ome.'))
     settings.rawImage = imread_structured(settings.rawImageFile);
 else
@@ -66,8 +66,9 @@ else
 end
 settings.rawImage = double(settings.rawImage);
 settings.rawImage = settings.rawImage / max(settings.rawImage(:));
-
 settings.maxProjectionImage = max(settings.rawImage, [], 3);
+
+%% initialize the settings
 settings.maximumProjectionMode = true;
 settings.currentSlice = 1;
 settings.colormapIndex = 1;

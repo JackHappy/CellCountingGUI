@@ -46,6 +46,7 @@ function keyReleaseEventHandler(~,evt)
         settings.gamma(1) = max(0, settings.gamma(1) - 0.1);
         updateVisualization;
         
+    %% add a new detection if in slice-mode
     elseif (strcmp(evt.Character, 'a'))
 
         if (settings.maximumProjectionMode == true)
@@ -56,68 +57,87 @@ function keyReleaseEventHandler(~,evt)
             updateVisualization;
         end
         
-        %% save dialog
+    %% toggle correct aspect ratio
     elseif (strcmp(evt.Character, 'v'))
         settings.axesEqual = ~settings.axesEqual;
         updateVisualization;
+    
+    %% export the results
     elseif (strcmp(evt.Character, 'e'))
-        exportProject();        
+        exportProject();
+        
+    %% select a region of interest and assign the current group to contained detections
     elseif (strcmp(evt.Character, 's'))
         
+        %% open a freehand drawing tool
         h = imfreehand;
-        mymask = createMask(h);
+        currentMask = createMask(h);
         
+        %% loop through all detections and check for mask intersection
         for i=1:size(settings.currentDetections,1)
             if (settings.maximumProjectionMode == true)
                 currentPosition = round(settings.currentDetections(i,3:4));
-                if (mymask(currentPosition(2), currentPosition(1)) > 0)
+                if (currentMask(currentPosition(2), currentPosition(1)) > 0)
                     settings.currentDetections(i, settings.groupIdIndex) = settings.selectedGroup;
                 end
             else
                 currentPosition = round(settings.currentDetections(i,3:5));
-                if (mymask(currentPosition(2), currentPosition(1)) > 0 && currentPosition(3) == settings.currentSlice)
+                if (currentMask(currentPosition(2), currentPosition(1)) > 0 && currentPosition(3) == settings.currentSlice)
                     settings.currentDetections(i, settings.groupIdIndex) = settings.selectedGroup;
                 end
             end
         end
         updateVisualization;
-        %%...
-        %msgbox(['Results successfully saved to ' settings.outputFolder], 'Finished saving results ...');
+
+    %% toggle maximum projection / slice mode
     elseif (strcmp(evt.Character, 'm'))
         settings.maximumProjectionMode = ~settings.maximumProjectionMode;
         updateVisualization;
+        
+	%% toggle the color map
     elseif (strcmp(evt.Character, 'c'))
         settings.colormapIndex = mod(settings.colormapIndex+1, 3)+1;
         updateVisualization;
-    elseif (strcmp(evt.Character, 'd'))
-        settings.showDetections = ~settings.showDetections;
-        updateVisualization;
+        
+    %% reset the current group selection
     elseif (strcmp(evt.Character, 'r'))
         answer = questdlg('Really reset current group selection (no undo available!)?');
         if (strcmp(answer, 'Yes'))
             settings.currentDetections(:,settings.groupIdIndex) = 0;
             updateVisualization;
         end
+        
+    %% reset the zoom
     elseif (strcmp(evt.Character, 'o'))
         settings.xLim = [1, size(settings.rawImage,1)];
         settings.yLim = [1, size(settings.rawImage,2)];
         updateVisualization;
 
-    elseif (strcmp(evt.Character, 'h'))
-        %% show the help dialog
+    %% show the help dialog
+    elseif (strcmp(evt.Character, 'h'))    
         showHelp;
+        
+	%% set group 1 for selection
     elseif (strcmp(evt.Character, '1'))
         settings.selectedGroup = 1;
         updateVisualization;
+    
+    %% set group 2 for selection
     elseif (strcmp(evt.Character, '2'))
         settings.selectedGroup = 2;
         updateVisualization;
+    
+	%% set group 3 for selection
     elseif (strcmp(evt.Character, '3'))
         settings.selectedGroup = 3;
         updateVisualization;
+
+    %% set group 4 for selection
     elseif (strcmp(evt.Character, '4'))
         settings.selectedGroup = 4;
         updateVisualization;
+    
+	%% set group unassigned for selection
     elseif (strcmp(evt.Character, '5'))
         settings.selectedGroup = 0;
         updateVisualization;

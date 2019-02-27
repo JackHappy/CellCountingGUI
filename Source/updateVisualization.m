@@ -31,16 +31,13 @@ global settings;
 settings.currentSlice = min(max(1, settings.currentSlice), size(settings.rawImage,3));
 
 %% filter the detections
-%% ...
 settings.colormap = settings.colormapStrings{settings.colormapIndex};
 figure(settings.mainFigure);
 clf;
 set(settings.mainFigure, 'Color', 'black');
 set(gca, 'Units', 'normalized', 'Position', [0,0,1,1]);
-% colordef black;
-% set(gcf, 'Color', 'black');
-% set(gca, 'Color', 'black');
 
+%% visualize the maximum projection view
 if (settings.maximumProjectionMode == true)
     set(settings.mainFigure, 'Name', ['Maximum Projection']);
     
@@ -78,19 +75,20 @@ else
     end
 end
 
+%% show the group ids and counts
 textColors = {'white', 'red'};
-text('String', ['#Unassigned: ' num2str(sum(settings.currentDetections(:,settings.groupIdIndex) == 0))], 'FontSize', settings.fontSize + ((settings.selectedGroup == 0) * 5), 'Color', settings.groupColors(1, :), 'Units', 'normalized', 'Position', [0.01 0.98], 'Background', 'black');
-text('String', ['#Group 1: ' num2str(sum(settings.currentDetections(:,settings.groupIdIndex) == 1))], 'FontSize', settings.fontSize + ((settings.selectedGroup == 1) * 5), 'Color', settings.groupColors(2, :), 'Units', 'normalized', 'Position', [0.01 0.94], 'Background', 'black');
-text('String', ['#Group 2: ' num2str(sum(settings.currentDetections(:,settings.groupIdIndex) == 2))], 'FontSize', settings.fontSize + ((settings.selectedGroup == 2) * 5), 'Color', settings.groupColors(3, :), 'Units', 'normalized', 'Position', [0.01 0.90], 'Background', 'black');
-text('String', ['#Group 3: ' num2str(sum(settings.currentDetections(:,settings.groupIdIndex) == 3))], 'FontSize', settings.fontSize + ((settings.selectedGroup == 3) * 5), 'Color', settings.groupColors(4, :), 'Units', 'normalized', 'Position', [0.01 0.86], 'Background', 'black');
-text('String', ['#Group 4: ' num2str(sum(settings.currentDetections(:,settings.groupIdIndex) == 4))], 'FontSize', settings.fontSize + ((settings.selectedGroup == 4) * 5), 'Color', settings.groupColors(5, :), 'Units', 'normalized', 'Position', [0.01 0.82], 'Background', 'black');
+text('String', ['#Unassigned: ' num2str(sum(settings.currentDetections(:,settings.groupIdIndex) == 0))], 'FontSize', settings.fontSize + ((settings.selectedGroup == 0) * 3), 'Color', settings.groupColors(1, :), 'Units', 'normalized', 'Position', [0.01 0.98], 'Background', 'black');
+text('String', ['#Group 1: ' num2str(sum(settings.currentDetections(:,settings.groupIdIndex) == 1))], 'FontSize', settings.fontSize + ((settings.selectedGroup == 1) * 3), 'Color', settings.groupColors(2, :), 'Units', 'normalized', 'Position', [0.01 0.94], 'Background', 'black');
+text('String', ['#Group 2: ' num2str(sum(settings.currentDetections(:,settings.groupIdIndex) == 2))], 'FontSize', settings.fontSize + ((settings.selectedGroup == 2) * 3), 'Color', settings.groupColors(3, :), 'Units', 'normalized', 'Position', [0.01 0.90], 'Background', 'black');
+text('String', ['#Group 3: ' num2str(sum(settings.currentDetections(:,settings.groupIdIndex) == 3))], 'FontSize', settings.fontSize + ((settings.selectedGroup == 3) * 3), 'Color', settings.groupColors(4, :), 'Units', 'normalized', 'Position', [0.01 0.86], 'Background', 'black');
+text('String', ['#Group 4: ' num2str(sum(settings.currentDetections(:,settings.groupIdIndex) == 4))], 'FontSize', settings.fontSize + ((settings.selectedGroup == 4) * 3), 'Color', settings.groupColors(5, :), 'Units', 'normalized', 'Position', [0.01 0.82], 'Background', 'black');
 
-
-
+%% if enabled, use correct aspect ratio
 if (settings.axesEqual == true)
     axis equal;
 end
 axis off;
 
+%% apply zoom
 set(gca, 'XLim', settings.xLim);
 set(gca, 'YLim', settings.yLim);
