@@ -1,10 +1,10 @@
 %%
- % SpotDetectionAndColocalizationGUI.
- % Copyright (C) 2017 J. Stegmaier, M. Schwarzkopf, H. Choi, A. Cunha
+ % CellCountingGUI.
+ % Copyright (C) 2019 D. Eschweiler, M. Gliksberg, J. Stegmaier
  %
  % Licensed under the Apache License, Version 2.0 (the "License");
  % you may not use this file except in compliance with the License.
- % You may obtain a copy of the License at
+ % You may obtain a copy of the Liceense at
  % 
  %     http://www.apache.org/licenses/LICENSE-2.0
  % 
@@ -20,13 +20,7 @@
  % If you use this application for your work, please cite the repository and one
  % of the following publications:
  %
- % Bartschat, A.; Hübner, E.; Reischl, M.; Mikut, R. & Stegmaier, J. 
- % XPIWIT - An XML Pipeline Wrapper for the Insight Toolkit, 
- % Bioinformatics, 2016, 32, 315-317.
- %
- % Stegmaier, J.; Otte, J. C.; Kobitski, A.; Bartschat, A.; Garcia, A.; Nienhaus, G. U.; Strähle, U. & Mikut, R. 
- % Fast Segmentation of Stained Nuclei in Terabyte-Scale, Time Resolved 3D Microscopy Image Stacks, 
- % PLoS ONE, 2014, 9, e90036
+ % TBA
  %
  %%
 

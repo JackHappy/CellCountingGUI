@@ -1,10 +1,10 @@
 %%
  % CellCountingGUI.
- % Copyright (C) 2019 J. Stegmaier, D. Eschweiler
+ % Copyright (C) 2019 D. Eschweiler, M. Gliksberg, J. Stegmaier
  %
  % Licensed under the Apache License, Version 2.0 (the "License");
  % you may not use this file except in compliance with the License.
- % You may obtain a copy of the License at
+ % You may obtain a copy of the Liceense at
  % 
  %     http://www.apache.org/licenses/LICENSE-2.0
  % 
@@ -23,7 +23,7 @@
  % TBA
  %
  %%
-
+ 
 %% the key event handler
 function keyReleaseEventHandler(~,evt)
     global settings;

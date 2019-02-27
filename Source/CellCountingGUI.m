@@ -1,6 +1,6 @@
 %%
  % CellCountingGUI.
- % Copyright (C) 2019 J. Stegmaier, D. Eschweiler, M. Gliksberg
+ % Copyright (C) 2019 D. Eschweiler, M. Gliksberg, J. Stegmaier
  %
  % Licensed under the Apache License, Version 2.0 (the "License");
  % you may not use this file except in compliance with the License.
